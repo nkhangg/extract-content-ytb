@@ -4,7 +4,6 @@ ffmpeg-python
 torch>=2.0.0     # (Whisper cần, nếu chưa có)
 tqdm             # (hiển thị progress bar đẹp hơn)
 pydub
-PyQt6
-PyQt6-Qt6
-PyQt6-sip
-pyinstaller
+flask
+flask-cors
+python-dotenv

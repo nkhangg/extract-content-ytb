@@ -14,30 +14,30 @@ OUTPUT_DIR = "downloads"  # Thư mục chứa kết quả
 MODELS_DIR = 'models'
 
 
-# ========================
-# 💻 Thiết lập ffmpeg cho PyInstaller
-# ========================
-if getattr(sys, 'frozen', False):
-    # Khi đóng gói PyInstaller
-    base_path = sys._MEIPASS
-else:
-    base_path = os.path.abspath(".")
+# # ========================
+# # 💻 Thiết lập ffmpeg cho PyInstaller
+# # ========================
+# if getattr(sys, 'frozen', False):
+#     # Khi đóng gói PyInstaller
+#     base_path = sys._MEIPASS
+# else:
+#     base_path = os.path.abspath(".")
 
-ffmpeg_dir = os.path.join(base_path, "bin")
+# ffmpeg_dir = os.path.join(base_path, "bin")
 
-# Cập nhật PATH
-os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
+# # Cập nhật PATH
+# os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
 
-# Gán cụ thể binary path
-ffmpeg_path = os.path.join(ffmpeg_dir, "ffmpeg")
-ffprobe_path = os.path.join(ffmpeg_dir, "ffprobe")
+# # Gán cụ thể binary path
+# ffmpeg_path = os.path.join(ffmpeg_dir, "ffmpeg")
+# ffprobe_path = os.path.join(ffmpeg_dir, "ffprobe")
 
-os.environ["FFMPEG_BINARY"] = ffmpeg_path
-os.environ["FFPROBE_BINARY"] = ffprobe_path
+# os.environ["FFMPEG_BINARY"] = ffmpeg_path
+# os.environ["FFPROBE_BINARY"] = ffprobe_path
 
-# Kiểm tra xem có file tồn tại không
-print(f"🔍 ffmpeg path: {ffmpeg_path} => {os.path.exists(ffmpeg_path)}")
-print(f"🔍 ffprobe path: {ffprobe_path} => {os.path.exists(ffprobe_path)}")
+# # Kiểm tra xem có file tồn tại không
+# print(f"🔍 ffmpeg path: {ffmpeg_path} => {os.path.exists(ffmpeg_path)}")
+# print(f"🔍 ffprobe path: {ffprobe_path} => {os.path.exists(ffprobe_path)}")
 
 
 # ========================

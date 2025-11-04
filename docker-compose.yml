@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  # 🧠 Backend Flask
+  transcriber:
+    container_name: video-transcriber
+    build:
+      context: ./be
+      dockerfile: Dockerfile
+    image: video-transcriber:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000" # Flask port
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./be/downloads:/app/downloads # mount để lưu file ra ngoài
+      - ./be/models:/app/models # mount cache model (Whisper)
+    networks:
+      - app-network
+
+  # 💻 Frontend React
+  frontend:
+    container_name: video-transcriber-fe
+    build:
+      context: ./fe
+      dockerfile: Dockerfile
+    image: video-transcriber-fe:latest
+    restart: unless-stopped
+    ports:
+      - "3000:4173" # React dev / serve port
+    depends_on:
+      - transcriber
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WDS_SOCKET_PORT=0
+      # 👉 Cấu hình API URL trỏ về backend container
+      - VITE_BASE_URL=http://transcriber:8000
+      - VITE_APP_NAME='Extract Video'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
